@@ -13,9 +13,10 @@ download_all() {
   CHARACTER_DIR='game/951/wiki/Character'
 
   readarray -t CHARACTER_PAGES <<<"$(
-    curl "$DOMAIN/$CHARACTER_DIR" 2>/dev/null | \
-      grep -o "${CHARACTER_DIR}"'_\(FF\|Core\)[^"]*_[^"]*' | \
-      sed "s/&#39;/'/g"
+    curl "$DOMAIN/$CHARACTER_DIR" 2>/dev/null \
+      | grep -o "${CHARACTER_DIR}"'_\(FF\|Core\)[^"]*_[^"]*' \
+      | sed "s/&#39;/'/g" \
+      | /usr/bin/sort -u
     )"
 
   C=1
